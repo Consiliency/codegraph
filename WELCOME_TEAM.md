@@ -6,7 +6,7 @@ You are now part of the CodeGraph/USA development team!
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/Consiliency/codegraph
+   git clone --recursive https://github.com/Consiliency/codegraph
    cd codegraph
    ```
 

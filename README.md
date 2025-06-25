@@ -6,7 +6,7 @@ Transform how AI understands code through graph-native semantic intelligence.
 
 ```bash
 # Clone this repository
-git clone https://github.com/Consiliency/codegraph
+git clone --recursive https://github.com/Consiliency/codegraph
 cd codegraph
 
 # Start the development environment
@@ -52,7 +52,7 @@ cd codegraph
 
 1. **Clone and setup**:
    ```bash
-   git clone https://github.com/Consiliency/codegraph
+   git clone --recursive https://github.com/Consiliency/codegraph
    cd codegraph
    cp .env.example .env
    # Edit .env and add your OpenAI API key

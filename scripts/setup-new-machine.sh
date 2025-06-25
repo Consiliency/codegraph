@@ -30,6 +30,12 @@ if [ $MISSING_DEPS -eq 1 ]; then
     exit 1
 fi
 
+# Initialize and update submodules
+echo ""
+echo "Initializing submodules..."
+git submodule init
+git submodule update --recursive
+
 # Setup environment
 echo ""
 echo "Setting up environment..."
