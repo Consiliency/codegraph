@@ -1,28 +1,80 @@
-# CodeGraph Development Rules
+# CodeGraph Development Rules for Cursor AI
 
 ## Project Context
-- This is CodeGraph/USA, a graph-native semantic code intelligence system
-- We use TypeScript for API, Python for analysis, C++ for core engine
-- Follow existing patterns in each language repository
+You are working on CodeGraph/USA, a graph-native semantic code intelligence system that reduces LLM token usage by 70% through precise context composition.
+
+## Architecture Overview
+- **codegraph-api**: TypeScript GraphQL/REST server (port 4000)
+- **codegraph-analysis**: Python ML service with embeddings (port 8000)
+- **codegraph-core**: C++ high-performance engine (Tree-sitter, BLAKE3)
+- **codegraph-proto**: Shared Protocol Buffer definitions
+- **codegraph-deploy**: Docker infrastructure
+
+## Development Commands You Can Run
+When asked to start services:
+```bash
+cd codegraph-deploy && docker-compose up -d && cd ..
+cd codegraph-api && npm run dev &
+cd codegraph-analysis && poetry run uvicorn codegraph_analysis.main:app --reload &
+```
+
+When asked to test:
+```bash
+cd codegraph-api && npm test
+cd codegraph-analysis && poetry run pytest
+```
+
+When asked to check the system:
+```bash
+curl http://localhost:4000/health
+curl http://localhost:8000/health
+```
 
 ## Code Standards
-- TypeScript: Use strict mode, async/await, proper types
-- Python: Type hints, async where appropriate, follow PEP 8
-- C++: Modern C++20, RAII, smart pointers
+### TypeScript (codegraph-api)
+- Use strict TypeScript with explicit types
+- Async/await for all async operations
+- GraphQL resolvers should be typed
+- Use dependency injection pattern
 
-## Architecture Rules
-- Graph operations go through Memgraph
-- Vector operations go through Qdrant
-- Use Protocol Buffers for inter-service communication
-- Maintain clean separation between services
+### Python (codegraph-analysis)
+- Type hints required for all functions
+- Use async functions for I/O operations
+- Follow PEP 8 strictly
+- Document with docstrings
+
+### General Rules
+- NEVER commit .env files
+- ALWAYS check for existing implementations before creating new ones
+- Use semantic commit messages: feat:, fix:, docs:, test:
+- Add tests for any new functionality
+
+## File Locations
+- GraphQL schemas: codegraph-api/src/graphql/
+- Python services: codegraph-analysis/src/codegraph_analysis/services/
+- Proto definitions: codegraph-proto/proto/
+- Docker configs: codegraph-deploy/
+
+## Database Access
+- Memgraph: Use Cypher queries through the service layer
+- Qdrant: Use the embedding service for vector operations
+- Never access databases directly from resolvers
+
+## Common Tasks
+When implementing a new feature:
+1. Check if proto definitions need updating
+2. Implement service layer first
+3. Add GraphQL resolver
+4. Write tests
+5. Update documentation
 
 ## Security
-- Never commit secrets or API keys
-- Use environment variables for configuration
 - Validate all inputs
-- Follow OWASP guidelines
+- Use parameterized queries
+- Check authorization in resolvers
+- Log security events
 
-## Testing
-- Write tests for new features
-- Maintain >80% code coverage
-- Use mocking for external services
+## Error Handling
+- Return proper GraphQL errors
+- Log errors with context
+- Never expose internal details to clients
