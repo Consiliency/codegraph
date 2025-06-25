@@ -1,0 +1,12 @@
+[submodule "codegraph-core"]
+	path = codegraph-core
+	url = https://github.com/Consiliency/codegraph-core.git
+[submodule "codegraph-api"]
+	path = codegraph-api
+	url = https://github.com/Consiliency/codegraph-api.git
+[submodule "codegraph-analysis"]
+	path = codegraph-analysis
+	url = https://github.com/Consiliency/codegraph-analysis.git
+[submodule "codegraph-proto"]
+	path = codegraph-proto
+	url = https://github.com/Consiliency/codegraph-proto.git
