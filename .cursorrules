@@ -1,0 +1,28 @@
+# CodeGraph Development Rules
+
+## Project Context
+- This is CodeGraph/USA, a graph-native semantic code intelligence system
+- We use TypeScript for API, Python for analysis, C++ for core engine
+- Follow existing patterns in each language repository
+
+## Code Standards
+- TypeScript: Use strict mode, async/await, proper types
+- Python: Type hints, async where appropriate, follow PEP 8
+- C++: Modern C++20, RAII, smart pointers
+
+## Architecture Rules
+- Graph operations go through Memgraph
+- Vector operations go through Qdrant
+- Use Protocol Buffers for inter-service communication
+- Maintain clean separation between services
+
+## Security
+- Never commit secrets or API keys
+- Use environment variables for configuration
+- Validate all inputs
+- Follow OWASP guidelines
+
+## Testing
+- Write tests for new features
+- Maintain >80% code coverage
+- Use mocking for external services
